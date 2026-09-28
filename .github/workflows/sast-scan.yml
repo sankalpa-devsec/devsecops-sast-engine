@@ -16,5 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Semgrep SAST Scanner
-        run: |
-          docker run --rm -v $(pwd):/src returntocorp/semgrep semgrep scan --config auto --error
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/owasp-top-ten
