@@ -1,0 +1,20 @@
+name: SAST Security Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  semgrep-sast:
+    name: Semgrep Code Security Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep SAST Scanner
+        run: |
+          docker run --rm -v $(pwd):/src returntocorp/semgrep semgrep scan --config auto --error
